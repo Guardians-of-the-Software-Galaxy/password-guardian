@@ -1,19 +1,29 @@
+
+# Fernet module is imported from the 
+# cryptography package
 from cryptography.fernet import Fernet
-
-# list vars to determine information
-key_control = 0  # determine if need to generate a key or if a key is already stored
-
-
-# Create the key unique to each user
+  
+  
+# key is generated
 key = Fernet.generate_key()
 
+with open('filekey.key', 'wb') as filekey:
+   filekey.write(key)
 
+# value of key is assigned to a variable
+f = Fernet(key)
+  
+# the plaintext is converted to ciphertext
+with open('data.txt', 'rb') as file:
+    original = file.readline(1)
+    token = f.encrypt(b"welcome to geeksforgeeks")
+    print(token)
+# display the ciphertext
 
-
-
-fp = open('data.txt', 'r')
-list = []    # use heap or list?
-for i in fp:
-    list.append(i)
-    print(list)
-fp.close()
+  
+# decrypting the ciphertext
+#d = f.decrypt(token)
+  
+# display the plaintext and the decode() method 
+# converts it from byte to string
+#print(d.decode())
