@@ -15,9 +15,13 @@ f = Fernet(key)
   
 # the plaintext is converted to ciphertext
 with open('data.txt', 'rb') as file:
-    original = file.readline(1)
-    token = f.encrypt(b"welcome to geeksforgeeks")
+    original = file.readline()
+    print(original)
+    token = f.encrypt(original)
     print(token)
+    print('='*20)
+    d_token = f.decrypt(token)
+    print(d_token)
 # display the ciphertext
 
   
