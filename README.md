@@ -5,6 +5,6 @@ Login loop
 
 ##List of team members specifying under each team member's name: what they worked on in the project so far, and what they will be handling next.
 Larrisa Tsai:
-Nick 
+Nick Carr: 
 Linda Nguyen :
 Justin Loi: 
