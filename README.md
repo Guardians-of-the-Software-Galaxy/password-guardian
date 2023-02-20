@@ -15,7 +15,7 @@
 - Agreement and terms for user
 - Encryptions
 ##### Credits and Contributions
-- Larrisa Tsai: 
+- Larissa Tsai: 
   - Finished: Assignment 1 report and Assignment 2 report.
   - Next Tasks: Assignment 3 report or application code.
 - Nicholas Carr:
