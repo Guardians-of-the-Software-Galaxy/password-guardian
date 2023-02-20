@@ -1,11 +1,17 @@
-#What is complete so far
-Driver file
-Login loop
+# Password-Guardian
+### Assignment 2 : SDL: Implementation
+###### Finished
+- Created github orginization and repository 
+- Started on application code in python
+  - Created driver files 
+  - Created files for login
 
-###What is pending
+###### Pending
+- Time out idle users
+- 
+##### Credits and Contributions
+- Larrisa Tsai: Assignment 2 report
+- Nicholas Carr: Assignment 2 report
+- Justin Loi: Application code 
+- Linda Nguyen : README file
 
-###List of team members specifying under each team member's name: what they worked on in the project so far, and what they will be handling next.
-Larrisa Tsai:
-Nick Carr: 
-Linda Nguyen :
-Justin Loi: 
