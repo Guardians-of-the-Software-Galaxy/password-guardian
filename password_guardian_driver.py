@@ -2,6 +2,7 @@
 # cryptography package
 from cryptography.fernet import Fernet
 
+################################################################
 
 def login_request():
 
@@ -19,10 +20,12 @@ def login_request():
                 login = input('Enter your username:\n').encode()          # encode is to make string behave with Fernet
                 password = input('Enter your password:\n').encode()
 
-                x = f.encrypt(login)                     # here we need to read in the first  encrypted credential object and match encrypted values
-                y = f.encrypt(password)
-                print(x)                                 # testing
-                print(y)                                 # testing
+               
+            with open('data.txt', 'r') as data:
+                log_check = f.decrypt(data.readline().strip('n').encode()) 
+                pass_check = f.decrypt(data.readline().strip('n').encode())     
+                print(login, log_check)      
+                print(password, pass_check)                # testing
                 login_loop = False
                 has_account = True
                 # compare the password/login to the first credential object in data.txt, if match return true
@@ -32,6 +35,12 @@ def login_request():
             login_loop = False
 
     return has_account
+
+################################################################
+
+
+
+################################################################
 
 def create_account():                           # create account function, need to make sure a user cannot accidentally overwrite their account
                                                 # if a new key is generated and written to filekey, everything is essentially lost
@@ -57,6 +66,13 @@ def create_account():                           # create account function, need 
 
     with open('filekey.key', 'wb') as filekey: # store the encrypted user key to the file
         filekey.write(key)
+
+    f = Fernet(key)
+    login = f.encrypt(login)
+    password = f.encrypt(password)
+    with open('data.txt', 'w') as data:
+        data.write(login.decode() + '\n')
+        data.write(password.decode() + '\n')
 
 def get_key():                                      # returns the key to the user interface
 
