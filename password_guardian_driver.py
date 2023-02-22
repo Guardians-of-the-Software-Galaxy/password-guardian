@@ -22,16 +22,16 @@ def login_request():
 
                
             with open('data.txt', 'r') as data:
+                app_check = f.decrypt(data.readline().strip('n').encode()) 
                 log_check = f.decrypt(data.readline().strip('n').encode()) 
                 pass_check = f.decrypt(data.readline().strip('n').encode())     
-                print(login, log_check)      
-                print(password, pass_check)                # testing
                 login_loop = False
-                has_account = True
+                if ((login == log_check) and (password == pass_check)):
+                    print("Login successful!")
+                    has_account = True
                 # compare the password/login to the first credential object in data.txt, if match return true
         else:
             print("The user does not have an account. Please make an account.") 
-            has_account = False
             login_loop = False
 
     return has_account
@@ -70,10 +70,18 @@ def create_account():                           # create account function, need 
     f = Fernet(key)
     login = f.encrypt(login)
     password = f.encrypt(password)
+    app_name = f.encrypt("password_guardian".encode())
     with open('data.txt', 'w') as data:
+        data.write(app_name.decode() + '\n')
         data.write(login.decode() + '\n')
         data.write(password.decode() + '\n')
 
+################################################################
+
+
+
+
+################################################################
 def get_key():                                      # returns the key to the user interface
 
     with open('filekey.key', 'rb') as filekey:
@@ -82,7 +90,11 @@ def get_key():                                      # returns the key to the use
     
     return f
 
-
-
+################################################################
   
+class Credential:
+    app_name = ""
+    login_name = ""
+    password= "" 
 
+################################################################
