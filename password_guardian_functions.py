@@ -2,6 +2,17 @@
 # cryptography package
 from cryptography.fernet import Fernet
 
+# Below is the credential object/class
+
+################################################################
+
+class Credential:
+    app_name = ""
+    login_name = ""
+    password= "" 
+
+################################################################
+
 # Below is the login function.
 # 1) Obtain the login and password from the user
 # 2) Read and decrypt the application credentials from database file
@@ -39,7 +50,7 @@ def login_request():
             print("The user does not have an account. Please make an account.") 
             login_loop = False
 
-    return has_account
+    return has_account, login
 
 ################################################################
 
@@ -87,8 +98,8 @@ def create_account():                           # create account function, need 
 
 ################################################################
 
-
-
+# Below is the get key function
+# Simply returns the key to the user interface
 
 ################################################################
 def get_key():                                      # returns the key to the user interface
@@ -98,12 +109,5 @@ def get_key():                                      # returns the key to the use
                 f = Fernet(key)
     
     return f
-
-################################################################
-  
-class Credential:
-    app_name = ""
-    login_name = ""
-    password= "" 
 
 ################################################################
