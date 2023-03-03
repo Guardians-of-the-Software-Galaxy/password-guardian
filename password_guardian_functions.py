@@ -111,3 +111,31 @@ def get_key():                                      # returns the key to the use
     return f
 
 ################################################################
+
+
+
+
+################################################################
+
+# Below is the function to read the lines from data.txt, decrypt,
+# and place them into the credential.
+
+################################################################
+
+def decrypt_file():
+
+    with open('filekey.key', 'rb') as filekey:
+        key = filekey.read()
+        
+    f = Fernet(key)
+
+    credential_list = []
+    with open('data.txt', 'r') as file:
+        for i in file:                                  # does not go through line by line
+            x = file.readline().strip('\n').encode()
+            print(f.decrypt(x))
+
+    print(credential_list)
+    return credential_list
+
+################################################################
