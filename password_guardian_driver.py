@@ -5,7 +5,11 @@ credential_list = []
 
 if(login_request()):
     print("Welcome to Password Guardian, you have sucessfully logged in!")
-    crendential_list = decrypt_file()
+    string_list = decrypt_file()
+    print ([line for line in string_list])
+    credential_list = make_credentials(string_list)
+    credential_list.append(add_credential('Gmail', 'poop@gmail.com', 'foobar1'))
+    print([Credential.password for Credential in credential_list])
     # store the app credential first in the array or list to check passwords for content modification
     # call function to read encrypted data from data.txt into a list or array of credential objects 
     # access the array of credential objects based on application name

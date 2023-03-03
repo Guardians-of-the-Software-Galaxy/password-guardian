@@ -7,9 +7,11 @@ from cryptography.fernet import Fernet
 ################################################################
 
 class Credential:
-    app_name = ""
-    login_name = ""
-    password= "" 
+    
+    def __init__(self, name, login, password):
+        self.app_name = name
+        self.login = login
+        self.password = password
 
 ################################################################
 
@@ -38,9 +40,9 @@ def login_request():
                 password = input('Enter your password:\n').encode()       # encode as binary string
                
             with open('data.txt', 'r') as data:
-                app_check = f.decrypt(data.readline().strip('n').encode()) # encode as binary because the file was stored as text
-                log_check = f.decrypt(data.readline().strip('n').encode()) 
-                pass_check = f.decrypt(data.readline().strip('n').encode())     
+                app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
+                log_check = f.decrypt(data.readline().strip('\n').encode()) 
+                pass_check = f.decrypt(data.readline().strip('\n').encode())     
                 login_loop = False
                 if ((login == log_check) and (password == pass_check)): # verify credentials
                     print("Login successful!")
@@ -49,6 +51,7 @@ def login_request():
         else:
             print("The user does not have an account. Please make an account.") 
             login_loop = False
+            return False
 
     return has_account, login
 
@@ -124,18 +127,46 @@ def get_key():                                      # returns the key to the use
 
 def decrypt_file():
 
+    lines = []
     with open('filekey.key', 'rb') as filekey:
         key = filekey.read()
-        
-    f = Fernet(key)
+        f = Fernet(key)
+   
+    with open('data.txt', 'r') as data:
+        cred_list = []
+        for line in data:
+            lines.append(f.decrypt(line.strip('\n').encode()).decode())
 
-    credential_list = []
-    with open('data.txt', 'r') as file:
-        for i in file:                                  # does not go through line by line
-            x = file.readline().strip('\n').encode()
-            print(f.decrypt(x))
-
-    print(credential_list)
-    return credential_list
+    return lines
 
 ################################################################
+
+################################################################
+
+# Below is the function to add a new credential to the list.
+
+################################################################
+
+def add_credential(app_name, login, password):
+    new_credential = Credential(app_name, login, password)
+
+    return new_credential
+
+
+################################################################
+
+# Below is the function to make credentials from file.
+
+################################################################
+
+def make_credentials(string_list):
+
+    crendential_list = []
+    for i in range(0,len(string_list), 3):
+        app_name = string_list[i]
+        login = string_list[i + 1]
+        password = string_list[i + 2]
+        crendential_list.append(Credential(app_name, login, password))
+
+    print([Credential.password for Credential in crendential_list])
+    return crendential_list
