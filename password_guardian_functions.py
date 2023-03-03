@@ -168,5 +168,19 @@ def make_credentials(string_list):
         password = string_list[i + 2]
         crendential_list.append(Credential(app_name, login, password))
 
-    print([Credential.password for Credential in crendential_list])
+    
     return crendential_list
+
+################################################################
+
+# Below is the function to make credentials from file.
+
+################################################################
+
+def find_crendential(credential_name, credential_list):
+    for credential in credential_list:
+        if(credential.app_name is credential_name):
+            return credential
+
+    return "No cred found."
+

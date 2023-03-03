@@ -10,6 +10,7 @@ if(login_request()):
     credential_list = make_credentials(string_list)
     credential_list.append(add_credential('Gmail', 'poop@gmail.com', 'foobar1'))
     print([Credential.password for Credential in credential_list])
+    print(find_crendential('Gmail', credential_list).password)
     # store the app credential first in the array or list to check passwords for content modification
     # call function to read encrypted data from data.txt into a list or array of credential objects 
     # access the array of credential objects based on application name
