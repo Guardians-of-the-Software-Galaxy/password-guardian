@@ -177,10 +177,29 @@ def make_credentials(string_list):
 
 ################################################################
 
-def find_crendential(credential_name, credential_list):
-    for credential in credential_list:
-        if(credential.app_name is credential_name):
-            return credential
+def find_credential(credential_name, credential_list, password):
+    if(password == credential_list[0].password):
+        for credential in credential_list:
+            if(credential.app_name == credential_name):
+                print(credential.password + "\n")
+                return credential.password
+    else:
+        return "jeff_mcJeff_Jeff_McJefferson_Pearson"
 
-    return "No cred found."
+################################################################
+
+# Below is the function to display the list of credential names
+
+################################################################
+
+def show_creds(credential_list, password):
+    if(password == credential_list[0].password):
+        for credential in credential_list:
+            print(credential.app_name + "\n")
+
+    else:
+        print("Please enter the correct password guardian password to view the list of applications\n")
+
+################################################################
+
 
