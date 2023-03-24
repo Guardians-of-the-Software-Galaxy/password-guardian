@@ -18,12 +18,14 @@ delete_array = ['D', 'd', 'Delete', 'delete']
 edit_array = ['E', 'e', 'Edit', 'edit']
 view_array = ["V", "v", "View", "view"]
 
-if(login_request()):
+
+string_list = decrypt_file() # obtain the decrypted login/passwords from data.txt
+credential_list = make_credentials(string_list) # convert decryted strings to credentials and populate list
+app_password = input("Enter your password guardian password: ")
+
+if(login_request(credential_list, app_password)):
 
     print("Welcome to Password Guardian, you have sucessfully logged in!")
-    string_list = decrypt_file() # obtain the decrypted login/passwords from data.txt
-    credential_list = make_credentials(string_list) # convert decryted strings to credentials and populate list
-
     while(ui_loop):
 
         user_input = input('What would you like to do?\n'

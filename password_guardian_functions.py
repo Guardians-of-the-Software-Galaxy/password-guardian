@@ -22,39 +22,13 @@ class Credential:
 
 ################################################################
 
-def login_request():
+def login_request(credential_list, app_password):
 
-    login_loop = True     # controls the login loop
-    has_account = False   # returns if the user has an account
+    if(app_password == credential_list[0].password):  
+        return True
 
-    while(login_loop):
-
-        user_in = input('Do you have a login and password? Enter (y) for YES, Enter (n) for NO\n') 
-
-        if(user_in == 'y' or user_in == 'Y' or user_in == 'yes' or user_in == 'YES' or user_in == 'Yes'):
-
-            with open('filekey.key', 'rb') as filekey:   # here we get the key to test the login/password only
-                key = filekey.read()
-                f = Fernet(key)
-                login = input('Enter your username:\n').encode()          # encode is to make string behave with Fernet
-                password = input('Enter your password:\n').encode()       # encode as binary string
-               
-            with open('data.txt', 'r') as data:
-                app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
-                log_check = f.decrypt(data.readline().strip('\n').encode()) 
-                pass_check = f.decrypt(data.readline().strip('\n').encode())     
-                login_loop = False
-                if ((login == log_check) and (password == pass_check)): # verify credentials
-                    print("Login successful!")
-                    has_account = True
-                # compare the password/login to the first credential object in data.txt, if match return true
-        else:
-            print("The user does not have an account. Please make an account.") 
-            login_loop = False
-            return False
-
-    return has_account, login
-
+    return False
+    
 ################################################################
 
 
