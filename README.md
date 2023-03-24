@@ -30,11 +30,13 @@
 
 ### Assignment 3: SDLC: Implementation & Verification
 ###### Finished
-- 
+- Finished encryptions
+- Login request
+- Asking user for requests
 
 ###### Pending
 - Clean up user interface
-- Implement timer
+- Implement timer to kick out user 
 ##### Credits and Contributions
 - Larissa Tsai: 
   - Assignment 3 report
