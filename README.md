@@ -33,14 +33,15 @@
 - 
 
 ###### Pending
-- 
+- Clean up user interface
+- Implement timer
 ##### Credits and Contributions
 - Larissa Tsai: 
-  - 
+  - Assignment 3 report
 - Nicholas Carr:
-  - 
+  - Assignment 3 report and application code 
 - Justin Loi: 
-  - 
+  - Assignment 3 report
 - Linda Nguyen : 
-  - 
+  - Assignment 3 report
 
