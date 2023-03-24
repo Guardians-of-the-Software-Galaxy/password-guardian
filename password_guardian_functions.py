@@ -116,8 +116,6 @@ def get_key():                                      # returns the key to the use
 ################################################################
 
 
-
-
 ################################################################
 
 # Below is the function to read the lines from data.txt, decrypt,
@@ -147,11 +145,32 @@ def decrypt_file():
 
 ################################################################
 
-def add_credential(app_name, login, password):
-    new_credential = Credential(app_name, login, password)
-
+def add_credential(app_name, login, password, guardian_password, credential_list):
+    if(guardian_password == credential_list[0].password):
+        new_credential = Credential(app_name, login, password)
+    else:
+        return
     return new_credential
 
+
+################################################################
+
+################################################################
+
+# Below is the function to delete a credential to the list.
+
+################################################################
+
+def find_credential_to_delete(credential_name, credential_list, app_password):
+    if(app_password == credential_list[0].password):
+        for credential in credential_list:
+            if(credential.app_name == credential_name):
+                return credential
+    else:
+        return
+
+
+################################################################
 
 ################################################################
 
@@ -168,7 +187,6 @@ def make_credentials(string_list):
         password = string_list[i + 2]
         crendential_list.append(Credential(app_name, login, password))
 
-    
     return crendential_list
 
 ################################################################
@@ -184,7 +202,7 @@ def find_credential(credential_name, credential_list, password):
                 print(credential.password + "\n")
                 return credential.password
     else:
-        return "jeff_mcJeff_Jeff_McJefferson_Pearson"
+        return
 
 ################################################################
 
@@ -195,11 +213,31 @@ def find_credential(credential_name, credential_list, password):
 def show_creds(credential_list, password):
     if(password == credential_list[0].password):
         for credential in credential_list:
-            print(credential.app_name + "\n")
+            print(credential.app_name)
 
     else:
         print("Please enter the correct password guardian password to view the list of applications\n")
 
 ################################################################
 
+################################################################
+
+# Below is the function to display the list of credential names
+
+################################################################
+
+def write_encrypted_file(credential_list):
+    f = get_key()
+    with open('data.txt', 'w') as data:
+        for credential in credential_list:
+            app_name = f.encrypt(credential.app_name.encode())
+            login = f.encrypt(credential.login.encode())
+            pass_word = f.encrypt(credential.password.encode())
+            data.write(app_name.decode() + '\n') # decode from binary to text for storage   
+            data.write(login.decode() + '\n')     
+            data.write(pass_word.decode() + '\n')
+
+
+
+################################################################
 
