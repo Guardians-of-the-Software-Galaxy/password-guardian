@@ -29,21 +29,30 @@
   - Next tasks: Updating README file or Assignment 3 report or assist with application code. 
 
 ### Assignment 3: SDLC: Implementation & Verification
-###### Finished
+###### Progress
 - Finished encryptions
 - Login request
 - Asking user for requests
-
+###### Link
+https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
 ###### Pending
 - Clean up user interface
 - Implement timer to kick out user 
-##### Credits and Contributions
+##### Roles and responsibilities: 
 - Larissa Tsai: 
-  - Assignment 3 report
+  - New completions: Assignment 3 report
+  - Current: Cleaning up user interface
+  - Next: Full README file for users
 - Nicholas Carr:
-  - Assignment 3 report and application code 
+  - New completions: Assignment 3 report and application code 
+  - Current: Cleaning up user interface
+  - Next: Agreement and terms for user
 - Justin Loi: 
-  - Assignment 3 report
+  - New completions:Assignment 3 report
+  - Current: Cleaning up user interface
+  - Next: Implement timer to kick out user 
 - Linda Nguyen : 
-  - Assignment 3 report
+  - New completions: Assignment 3 report and readme file 
+  - Current: Cleaning up user interface
+  - Next: Finish driver files 
 
