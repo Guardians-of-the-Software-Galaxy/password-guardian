@@ -1,11 +1,12 @@
 # Fernet module is imported from the 
 # cryptography package
 from cryptography.fernet import Fernet
+from getpass import getpass
+
 
 # Below is the credential object/class
 
 ################################################################
-
 class Credential:
     
     def __init__(self, name, login, password):
@@ -37,7 +38,7 @@ def login_request():
                 key = filekey.read()
                 f = Fernet(key)
                 login = input('Enter your username:\n').encode()          # encode is to make string behave with Fernet
-                password = input('Enter your password:\n').encode()       # encode as binary string
+                password = getpass().encode()      # encode as binary string
                
             with open('data.txt', 'r') as data:
                 app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
@@ -105,6 +106,7 @@ def create_account():                           # create account function, need 
 # Simply returns the key to the user interface
 
 ################################################################
+
 def get_key():                                      # returns the key to the user interface
 
     with open('filekey.key', 'rb') as filekey:
@@ -151,7 +153,6 @@ def add_credential(app_name, login, password, guardian_password, credential_list
     else:
         return
     return new_credential
-
 
 ################################################################
 
