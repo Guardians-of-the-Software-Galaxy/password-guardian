@@ -163,6 +163,7 @@ def add_credential(app_name, login, password, guardian_password, credential_list
 ################################################################
 
 def find_credential_to_delete(credential_name, credential_list, app_password):
+   
     if(app_password == credential_list[0].password):
         for credential in credential_list:
             if(credential.app_name == credential_name):
@@ -201,7 +202,7 @@ def find_credential(credential_name, credential_list, password):
         for credential in credential_list:
             if(credential.app_name == credential_name):
                 print(credential.password + "\n")
-                return credential.password
+                return credential.password, credential.login
     else:
         return
 

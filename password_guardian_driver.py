@@ -20,6 +20,8 @@ add_array = ['A', 'a', 'Add', 'add']
 delete_array = ['D', 'd', 'Delete', 'delete']
 edit_array = ['E', 'e', 'Edit', 'edit']
 view_array = ["V", "v", "View", "view"]
+yes = ["Y", "y", "Yes", "yes", "YES"]
+no = ["N", "n", "No", "no", "NO"]
 
 while(app_loop):
     if(login_request()):
@@ -43,10 +45,13 @@ while(app_loop):
                 app_password = getpass()
             
                 try:
-                    credential_password = find_credential(credential_name, credential_list, app_password)
+                    credential_password, credential_login = find_credential(credential_name, credential_list, app_password)
                     pyperclip.copy(str(credential_password))
                     pyperclip.paste()
-                    print("The password for " + credential_name + " is pasted to the clipboard!\n") 
+                    print("The password for " + credential_name + " is pasted to the clipboard!\n")
+                    user_input = input("Would you like to view your login name?\n")
+                    if(user_input in yes):
+                        print(credential_login)
                 except:
                     print("Either the password was incorrect or the credential does not exist."
                           "View your stored credential names with the (V)iew option.\n")
