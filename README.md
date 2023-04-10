@@ -56,3 +56,31 @@ https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
   - Current: Cleaning up user interface
   - Next: Finish driver files 
 
+### Assignment 4: SDLC: Verification
+###### Progress
+- Finished encryptions
+- Login request
+- Asking user for requests
+###### Link
+https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
+###### Pending
+- Clean up user interface
+- Implement timer to kick out user 
+##### Roles and responsibilities: 
+- Larissa Tsai: 
+  - New completions: Assignment 4 report  and cleaning up user interface
+  - Current: Cleaning up user interface
+  - Next: Full README file for users
+- Nicholas Carr:
+  - New completions: Assignment 4 report and application code and cleaning up user interface
+  - Current: Cleaning up user interface
+  - Next: Agreement and terms for user
+- Justin Loi: 
+  - New completions:Assignment 4 report and cleaning up user interface
+  - Current: 
+  - Next: Implement timer to kick out user 
+- Linda Nguyen : 
+  - New completions: Assignment 4 report and readme file 
+  - Current: Cleaning up user interface
+  - Next: Finish driver files 
+
