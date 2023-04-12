@@ -122,18 +122,8 @@ while (app_loop):
                 credential_name = input(
                     "What is the name of the credential you want to delete?\n")
                 app_password = getpass()
-
-                try:
-                    to_delete = find_credential_to_delete(
-                        credential_name, credential_list, app_password)
-                    if (to_delete.app_name != "password_guardian"):
-                        credential_list.remove(to_delete)
-                    else:
-                        print(
-                            "You cannot delete the password guardian credential. Please try something else.\n")
-                except:
-                    print("The credential entered does not exist,the password guardian password was incorrect, or you tried to delete the password_guardian credential."
-                          "To view stored creddential names, please select the (V)iew option.\n")
+                delete_credential(credential_name, credential_list, app_password)
+                
             else:
                 print("Restarting UI loop.\n")
     else:

@@ -175,17 +175,20 @@ def add_credential(app_name, login, password, guardian_password, credential_list
 
 ################################################################
 
-def find_credential_to_delete(credential_name, credential_list, app_password):
-   
+def delete_credential(credential_name, credential_list, app_password):
+    d_cred = False
     if(app_password == credential_list[0].password):
         if(credential_name == "password_guardian"):
             print("You cannot delete your password guardian credential. If you no longer wish to use password guardian,"
                   " delete data.txt and fliekey.key from the program directory.\n")
         for credential in credential_list:
             if(credential.app_name == credential_name and credential.app_name != "password_guardian"):
-                return credential
-    else:
-        return
+                print("Deleting " + credential.app_name + "\n")
+                credential_list.remove(credential)
+                d_cred = True
+    if not d_cred:
+        print("The credential " + credential_name + " is not stored in password guardian.\n")
+    return
 
 ################################################################
 
@@ -216,7 +219,6 @@ def find_credential(credential_name, credential_list, password):
     if(password == credential_list[0].password):
         for credential in credential_list:
             if(credential.app_name == credential_name):
-                print(credential.password + "\n")
                 return credential.password, credential.login
     else:
         return
@@ -306,11 +308,13 @@ def edit_cred(credential_name, app_password, credential_list):
             if(credential_name == credential.app_name and credential_name != "password_guardian" and change_name):
                 credential.app_name = new_name
                 print("hello app name\n")
-            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_login):
-                credential.login = new_login
-                print("hello login\n")
-            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_pass):
-                print("hello \n")
-                credential.password = new_pass
+                # codiga-disable
+                if(change_login):
+                    credential.login = new_login
+                    print("hello login\n")
+                    # codiga-disable
+                    if(change_pass):
+                        print("hello \n")
+                        credential.password = new_pass
 
 ################################################################
