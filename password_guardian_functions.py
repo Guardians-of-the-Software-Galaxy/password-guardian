@@ -2,7 +2,19 @@
 # cryptography package
 from cryptography.fernet import Fernet
 from getpass import getpass
+from pytimedinput import timedInput
+from getpass import getpass
 
+quit_array = ['Q', 'q', 'Quit', 'quit'] # array of possible input for valid user input values for each option
+find_array = ['F', 'f', 'Find', 'find']
+add_array = ['A', 'a', 'Add', 'add']
+delete_array = ['D', 'd', 'Delete', 'delete']
+edit_array = ['E', 'e', 'Edit', 'edit']
+view_array = ["V", "v", "View", "view"]
+yes = ["Y", "y", "Yes", "yes", "YES"]
+no = ["N", "n", "No", "no", "NO"]
+
+################################################################
 
 # Below is the credential object/class
 
@@ -44,10 +56,11 @@ def login_request():
                 app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
                 log_check = f.decrypt(data.readline().strip('\n').encode()) 
                 pass_check = f.decrypt(data.readline().strip('\n').encode())     
-                login_loop = False
+                
                 if ((login == log_check) and (password == pass_check)): # verify credentials
                     print("Login successful!")
                     has_account = True
+                    login_loop = False
                 # compare the password/login to the first credential object in data.txt, if match return true
         else:
             print("The user does not have an account. Please make an account.") 
@@ -57,7 +70,6 @@ def login_request():
     return has_account, login
 
 ################################################################
-
 
 # Below is the function that creates a user account. 
 # 1) Creates a key and stores it for subsequent use
@@ -80,7 +92,7 @@ def create_account():                           # create account function, need 
 
         happy = input()
         
-        if(happy == 'y' or happy == 'Y' or happy == 'YES' or happy == 'Yes'): #done
+        if(happy == 'y' or happy == 'Y' or happy == 'YES' or happy == 'Yes' or happy== 'yes'): #done
             create_loop = False
 
         else:
@@ -117,7 +129,6 @@ def get_key():                                      # returns the key to the use
 
 ################################################################
 
-
 ################################################################
 
 # Below is the function to read the lines from data.txt, decrypt,
@@ -149,11 +160,13 @@ def decrypt_file():
 
 def add_credential(app_name, login, password, guardian_password, credential_list):
     if(guardian_password == credential_list[0].password):
+        for credential in credential_list:
+            if credential.app_name == app_name:
+                print("The credential with that name already exists, please check yourself or delete the existing credential with that name using (V)iew.\n")
+                return credential_list
         new_credential = Credential(app_name, login, password)
-    else:
-        return
-    return new_credential
-
+        credential_list.append(new_credential)
+    return
 ################################################################
 
 ################################################################
@@ -165,12 +178,14 @@ def add_credential(app_name, login, password, guardian_password, credential_list
 def find_credential_to_delete(credential_name, credential_list, app_password):
    
     if(app_password == credential_list[0].password):
+        if(credential_name == "password_guardian"):
+            print("You cannot delete your password guardian credential. If you no longer wish to use password guardian,"
+                  " delete data.txt and fliekey.key from the program directory.\n")
         for credential in credential_list:
-            if(credential.app_name == credential_name):
+            if(credential.app_name == credential_name and credential.app_name != "password_guardian"):
                 return credential
     else:
         return
-
 
 ################################################################
 
@@ -205,7 +220,6 @@ def find_credential(credential_name, credential_list, password):
                 return credential.password, credential.login
     else:
         return
-
 ################################################################
 
 # Below is the function to display the list of credential names
@@ -216,7 +230,6 @@ def show_creds(credential_list, password):
     if(password == credential_list[0].password):
         for credential in credential_list:
             print(credential.app_name)
-
     else:
         print("Please enter the correct password guardian password to view the list of applications\n")
 
@@ -239,7 +252,65 @@ def write_encrypted_file(credential_list):
             data.write(login.decode() + '\n')     
             data.write(pass_word.decode() + '\n')
 
+################################################################
 
+def get_ui_input():
+    user_input, timed_out = timedInput('What would you like to do?\n'
+                                       'Enter from one of the options below:\n' 
+                                       'F, f, Find, find: to find a credential by application name\n'
+                                       'A, a, Add, add: to store a new credential\n'
+                                       'D, d, Delete, delete: to delete a credential\n'
+                                       'E, e, Edit, edit: to edit a credential\n'
+                                       'V, v, View, view: to view credential list\n'
+                                       'Q, q, Quit, quit:to quit\n', timeout = 30)
+    if(timed_out):
+        print("Timed out when waiting for input.")
+        print(f"User-input so far: '{user_input}'")
+
+    return user_input
+################################################################
+
+# Below is the function to display the list of credential names
 
 ################################################################
 
+def edit_cred(credential_name, app_password, credential_list):
+    new_name = ""
+    new_login = ""
+    new_pass = ""
+    user_input = ""
+    change_name = False
+    change_login = False
+    change_pass = False
+ 
+    if(app_password == credential_list[0].password):
+        
+        user_input = input("Would you like to change the credential name? (y/n): ")
+        if(user_input in yes):
+            change_name = True
+            new_name = input("What would you like the name of the credential to be? ")
+    
+        user_input = input("Would you like to change the login name for this credential? (y/n): ")
+        if(user_input in yes):
+            change_login = True
+            new_login = input("What would you like the login name to be? ")
+
+        user_input = input("Would you like to change the password for the credential? (y/n): ")
+        if user_input in yes:
+            change_pass = True
+            new_pass = getpass("What would you like the password of the credential to be? ")
+
+        user_input = input("Are you happy with " + new_name + " and " + new_login + " for this credential?")
+
+        for credential in credential_list:  
+            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_name):
+                credential.app_name = new_name
+                print("hello app name\n")
+            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_login):
+                credential.login = new_login
+                print("hello login\n")
+            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_pass):
+                print("hello \n")
+                credential.password = new_pass
+
+################################################################

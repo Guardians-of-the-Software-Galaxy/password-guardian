@@ -1,20 +1,21 @@
-import pyperclip
 from password_guardian_functions import *
 from getpass import getpass
-
+import pyperclip
 
 
 credential_list = []
 app_loop = True
 ui_loop = True
 inner_loop = True
-user_input = "" # ui input field
-credential_name = "" # credential name field
-credential_login = "" # credential login field
-credential_password = "" #credential password field
-app_password = "" # password guardian password field, allows user to access credentials throughout the app
+user_input = ""  # ui input field
+credential_name = ""  # credential name field
+credential_login = ""  # credential login field
+credential_password = ""  # credential password field
+# password guardian password field, allows user to access credentials throughout the app
+app_password = ""
 
-quit_array = ['Q', 'q', 'Quit', 'quit'] # array of possible input for valid user input values for each option
+# array of possible input for valid user input values for each option
+quit_array = ['Q', 'q', 'Quit', 'quit']
 find_array = ['F', 'f', 'Find', 'find']
 add_array = ['A', 'a', 'Add', 'add']
 delete_array = ['D', 'd', 'Delete', 'delete']
@@ -23,79 +24,125 @@ view_array = ["V", "v", "View", "view"]
 yes = ["Y", "y", "Yes", "yes", "YES"]
 no = ["N", "n", "No", "no", "NO"]
 
-while(app_loop):
-    if(login_request()):
+print("Disclaimer: This application stores application name, login name, and password for applications you would like to track."
+      " The application stores all information in the database file as encrypted data using the Fernet encryption package."
+      " To support heightened security, the application has no forgot password feature, in the case of a forgotten password, you must"
+      " reset your entire program and start over. Password guardian stores all information locally meaning that associated files are encrypted"
+      " at rest. This program generates two additional files, one to store the encrypted key, and one to store encrypted credential information."
+      "If you accidentally say that you do not have a password guardian account when one exists, simply close the program with ctrl + c before"
+      " creating new login for this application. PLEASE RUN ===> pip3 install pytimedinput <=== Enjoy! <('.'<)<('.')>(>'.')>")
+print("\n")
+
+while (app_loop):
+    if (login_request()):
 
         print("Welcome to Password Guardian, you have sucessfully logged in!")
-        string_list = decrypt_file() # obtain the decrypted login/passwords from data.txt
-        credential_list = make_credentials(string_list) # convert decryted strings to credentials and populate list
+        string_list = decrypt_file()  # obtain the decrypted login/passwords from data.txt
+        # convert decryted strings to credentials and populate list
+        credential_list = make_credentials(string_list)
 
-        while(ui_loop):
+        while (ui_loop):
 
-            user_input = input('What would you like to do?\n'
-                                'Enter from one of the options below:\n' 
-                                'F, f, Find, find: to find a credential by application name\n'
-                                'A, a, Add, add: to store a new credential\n'
-                                'D, d, Delete, delete: to delete a credential\n'
-                                'E, e, Edit, edit: to edit a credential\n'
-                                'Q, q, Quit, quit:to quit\n')
+            user_input = get_ui_input()
+            print(user_input)
 
-            if(user_input in find_array):
-                credential_name = input('What is the name of the application you would like your password for?\n')
+            if (user_input == ""):
+                app_loop = False
+                ui_loop = False
+                write_encrypted_file(credential_list)
+                credential_list = []
+                string_list = []
+                user_input = ""  # clean up
+                credential_name = ""  # clean up
+                credential_login = ""  # cleanup
+                credential_password = ""  # cleanup
+                app_password = ""  # cleanup
+                # make sure nothing can be pasted accidentally or by someone else
+                pyperclip.copy("<('.'<)<('.')>(>'.')>")
+                pyperclip.paste()
+                ui_loop = False
+                app_loop = False
+
+            elif (user_input in find_array):
+                credential_name = input(
+                    "What is the name of the credential you wish to use?\n")
                 app_password = getpass()
-            
+
                 try:
                     credential_password, credential_login = find_credential(credential_name, credential_list, app_password)
                     pyperclip.copy(str(credential_password))
                     pyperclip.paste()
-                    print("The password for " + credential_name + " is pasted to the clipboard!\n")
-                    user_input = input("Would you like to view your login name?\n")
-                    if(user_input in yes):
+                    print("The password for " + credential_name +
+                          " is pasted to the clipboard!\n")
+                    user_input = input(
+                        "Would you like to view your login name?\n")
+                    if (user_input in yes):
                         print(credential_login)
                 except:
-                    print("Either the password was incorrect or the credential does not exist."
-                          "View your stored credential names with the (V)iew option.\n")
-                
-            elif(user_input in view_array):
+                    print("Either the password was incorrect or the credential does not exist. View your stored credential names with the (V)iew option.\n")
+
+            elif (user_input in view_array):
                 app_password = getpass()
                 show_creds(credential_list, app_password)
 
-            elif(user_input in quit_array):
+            elif (user_input in quit_array):
                 write_encrypted_file(credential_list)
+                credential_list = []
+                string_list = []
+                user_input = ""  # clean up
+                credential_name = ""  # clean up
+                credential_login = ""  # cleanup
+                credential_password = ""  # cleanup
+                app_password = ""  # cleanup
+                # make sure nothing can be pasted accidentally or by someone else
+                pyperclip.copy("<('.'<)<('.')>(>'.')>")
+                pyperclip.paste()
                 ui_loop = False
                 app_loop = False
 
-            elif(user_input in add_array):
-                credential_name = input("Enter the name of the application you wish to generate a credential for: \n")
-                credential_login = input("Enter the login name for the new credential:\n")
-                credential_password = input("Enter the password for the new credential: \n")
+            elif (user_input in edit_array):
+                credential_name = input(
+                    "What is the name of the credential you wish to use?\n")
+                app_password = getpass(
+                    "Enter your password guardian password: \n")
+                edit_cred(credential_name, app_password, credential_list)
+
+            elif (user_input in add_array):
+                credential_name = input(
+                    "What is the name of the credential you wish to use?\n")
+                credential_login = input(
+                    "What is the login name you wish to store for this credential?\n")
+                credential_password = getpass(
+                    "Enter the password for the new credential: \n")
+                app_password = getpass(
+                    "Enter your password guardian password: \n")
+                add_credential(credential_name, credential_login, credential_password, app_password, credential_list)
+
+            elif (user_input in delete_array):
+                credential_name = input(
+                    "What is the name of the credential you want to delete?\n")
                 app_password = getpass()
 
                 try:
-                    new_credential = add_credential(credential_name, credential_login, credential_password, app_password, credential_list)
-                    credential_list.append(new_credential)
-                    for credential in credential_list:
-                        print(credential.app_name)
+                    to_delete = find_credential_to_delete(
+                        credential_name, credential_list, app_password)
+                    if (to_delete.app_name != "password_guardian"):
+                        credential_list.remove(to_delete)
+                    else:
+                        print(
+                            "You cannot delete the password guardian credential. Please try something else.\n")
                 except:
-                    print("Your password guardian password was incorrect, please try again using the correct password.\n")            
-
-            elif(user_input in delete_array):
-                credential_name = input("What is the name of the credential you want to delete?\n")
-                app_password = getpass()
-
-                try:
-                    to_delete = find_credential_to_delete(credential_name, credential_list, app_password)
-                    credential_list.remove(to_delete)
-                except:
-                    print("The credential entered does not exist or the password guardian password was incorrect."
-                          "To view stored creddential names, please select the (V)iew option.")
-            else: 
+                    print("The credential entered does not exist,the password guardian password was incorrect, or you tried to delete the password_guardian credential."
+                          "To view stored creddential names, please select the (V)iew option.\n")
+            else:
                 print("Restarting UI loop.\n")
     else:
-        print("Would you like to create a password guardian? Enter (y) for YES, (n) for NO")
-        create_account()
-        print("You may now log into password guardian!\n")
-
-
-        
-
+        user_input = input(
+            "Would you like to create a password guardian? Enter (y) for YES, (n) for NO")
+        if (user_input in yes):
+            create_account()
+            print("You may now log into password guardian!\n")
+        else:
+            print(
+                "Thanks for checking us out, consider using this application in the future.\n")
+            app_loop = False
