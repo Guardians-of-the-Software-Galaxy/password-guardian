@@ -277,44 +277,14 @@ def get_ui_input():
 ################################################################
 
 def edit_cred(credential_name, app_password, credential_list):
-    new_name = ""
-    new_login = ""
-    new_pass = ""
     user_input = ""
-    change_name = False
-    change_login = False
-    change_pass = False
- 
+
     if(app_password == credential_list[0].password):
         
-        user_input = input("Would you like to change the credential name? (y/n): ")
-        if(user_input in yes):
-            change_name = True
-            new_name = input("What would you like the name of the credential to be? ")
-    
-        user_input = input("Would you like to change the login name for this credential? (y/n): ")
-        if(user_input in yes):
-            change_login = True
-            new_login = input("What would you like the login name to be? ")
-
-        user_input = input("Would you like to change the password for the credential? (y/n): ")
-        if user_input in yes:
-            change_pass = True
-            new_pass = getpass("What would you like the password of the credential to be? ")
-
-        user_input = input("Are you happy with " + new_name + " and " + new_login + " for this credential?")
+        user_input = getpass("What would you like the new application password to be?\n")
 
         for credential in credential_list:  
-            if(credential_name == credential.app_name and credential_name != "password_guardian" and change_name):
-                credential.app_name = new_name
-                print("hello app name\n")
-                # codiga-disable
-                if(change_login):
-                    credential.login = new_login
-                    print("hello login\n")
-                    # codiga-disable
-                    if(change_pass):
-                        print("hello \n")
-                        credential.password = new_pass
-
+            if(credential_name == credential.app_name):
+                credential.password = user_input
+            
 ################################################################
