@@ -267,7 +267,6 @@ def get_ui_input():
                                        'Q, q, Quit, quit:to quit\n', timeout = 30)
     if(timed_out):
         print("Timed out when waiting for input.")
-        print(f"User-input so far: '{user_input}'")
 
     return user_input
 ################################################################
