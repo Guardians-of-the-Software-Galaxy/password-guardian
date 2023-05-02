@@ -128,7 +128,7 @@ while (app_loop):
                 print("Restarting UI loop.\n")
     else:
         user_input = input(
-            "Would you like to create a password guardian? Enter (y) for YES, (n) for NO")
+            "Would you like to create a password guardian? Enter (y) for YES, (n) for NO\n")
         if (user_input in yes):
             create_account()
             print("You may now log into password guardian!\n")

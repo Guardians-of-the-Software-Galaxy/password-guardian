@@ -46,24 +46,26 @@ def login_request():
 
         if(user_in == 'y' or user_in == 'Y' or user_in == 'yes' or user_in == 'YES' or user_in == 'Yes'):
 
-            with open('filekey.key', 'rb') as filekey:   # here we get the key to test the login/password only
-                key = filekey.read()
-                f = Fernet(key)
-                login = input('Enter your username:\n').encode()          # encode is to make string behave with Fernet
-                password = getpass().encode()      # encode as binary string
+            try:
+                with open('filekey.key', 'rb') as filekey:   # here we get the key to test the login/password only
+                    key = filekey.read()
+                    f = Fernet(key)
+                    login = input('Enter your username:\n').encode()          # encode is to make string behave with Fernet
+                    password = getpass().encode()      # encode as binary string
                
-            with open('data.txt', 'r') as data:
-                app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
-                log_check = f.decrypt(data.readline().strip('\n').encode()) 
-                pass_check = f.decrypt(data.readline().strip('\n').encode())     
+                with open('data.txt', 'r') as data:
+                    app_check = f.decrypt(data.readline().strip('\n').encode()) # encode as binary because the file was stored as text
+                    log_check = f.decrypt(data.readline().strip('\n').encode()) 
+                    pass_check = f.decrypt(data.readline().strip('\n').encode())     
                 
                 if ((login == log_check) and (password == pass_check)): # verify credentials
                     print("Login successful!")
                     has_account = True
                     login_loop = False
-                # compare the password/login to the first credential object in data.txt, if match return true
+            except:
+                print("There is no previous password guardian account. Please consider creating one.\n")
         else:
-            print("The user does not have an account. Please make an account.") 
+            print("The user does not have an account. Please make an account.\n") 
             login_loop = False
             return False
 
@@ -231,7 +233,9 @@ def find_credential(credential_name, credential_list, password):
 def show_creds(credential_list, password):
     if(password == credential_list[0].password):
         for credential in credential_list:
-            print(credential.app_name)
+            print("*********************\n")
+            print(credential.app_name + "\n")
+            print("*********************\n")
     else:
         print("Please enter the correct password guardian password to view the list of applications\n")
 
