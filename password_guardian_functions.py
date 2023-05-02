@@ -268,7 +268,7 @@ def get_ui_input():
                                        'D, d, Delete, delete: to delete a credential\n'
                                        'E, e, Edit, edit: to edit a credential\n'
                                        'V, v, View, view: to view credential list\n'
-                                       'Q, q, Quit, quit:to quit\n', timeout = 30)
+                                       'Q, q, Quit, quit:to quit\n', timeout = 60)
     if(timed_out):
         print("Timed out when waiting for input.")
 
