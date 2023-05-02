@@ -84,3 +84,46 @@ https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
   - Current: Cleaning up user interface
   - Next: Full READ ME file 
 
+### Assignment 5: SDLC: Release
+###### Progress
+The program has been finalized and it has all the minimal functionality that the developers wanted to include. 
+
+##### Roles and responsibilities: 
+- Larissa Tsai: 
+  - New completions: Assignment 5 Report and Cleaning up Interface
+- Nicholas Carr:
+  - New completions: Assignment 5 Report User Guide and Cleaning up Interface
+- Justin Loi: 
+  - New completions: Assignment 5 Wiki pages and release version
+- Linda Nguyen : 
+  - New completions: Assignment 5 Report and Cleaning up Interface
+
+##### Technical Notes:
+
+How to use:
+Please refer to our wiki page at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian/wiki
+
+How to Install and Run:
+Visit our repository at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
+Download the master branch as a ZIP file
+In your terminal, change to the app directory
+Run **pip install pytimedinput**
+Run the program using **python password-guardian**
+
+
+How to Uninstall:
+Delete all Password Guardian files from your folder system
+
+##### Closing Thoughts:
+Challenges:
+- Originally, Password Guardian was going to be a C program but there were difficulties implementing the security functions (hasing and time out)
+
+Important Acheivements:
+- Implementing a Time Out Functioning
+- Finding the right library to encrypt the functions
+
+##### Links:
+- Online Repository: https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
+- Final Project Documentation File: @TODO
+- Release Version: https://github.com/Guardians-of-the-Software-Galaxy/password-guardian/releases/tag/V1.00
+- Wiki Page: https://github.com/Guardians-of-the-Software-Galaxy/password-guardian/wiki
