@@ -104,15 +104,15 @@ How to use:
 Please refer to our wiki page at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian/wiki
 
 How to Install and Run:
-Visit our repository at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
-Download the master branch as a ZIP file
-In your terminal, change to the app directory
-Run **pip install pytimedinput**
-Run the program using **python password-guardian**
+- Visit our repository at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
+- Download the master branch as a ZIP file
+- In your terminal, change to the app directory
+- Run **pip install pytimedinput**
+- Run the program using **python password-guardian**
 
 
 How to Uninstall:
-Delete all Password Guardian files from your folder system
+- Delete all Password Guardian files from your folder system
 
 ##### Closing Thoughts:
 Challenges:
