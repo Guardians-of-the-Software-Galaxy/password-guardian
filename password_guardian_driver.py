@@ -21,8 +21,8 @@ add_array = ['A', 'a', 'Add', 'add']
 delete_array = ['D', 'd', 'Delete', 'delete']
 edit_array = ['E', 'e', 'Edit', 'edit']
 view_array = ["V", "v", "View", "view"]
-yes = ["Y", "y", "Yes", "yes", "YES"]
-no = ["N", "n", "No", "no", "NO"]
+yes = ["Y", "y", "Yes", "yes", "YES", "yES", "YEs", "YeS"]
+no = ["N", "n", "No", "no", "NO", "nO"]
 
 print("Disclaimer: This application stores application name, login name, and password for applications you would like to track."
       " The application stores all information in the database file as encrypted data using the Fernet encryption package."

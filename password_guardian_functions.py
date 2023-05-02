@@ -11,8 +11,8 @@ add_array = ['A', 'a', 'Add', 'add']
 delete_array = ['D', 'd', 'Delete', 'delete']
 edit_array = ['E', 'e', 'Edit', 'edit']
 view_array = ["V", "v", "View", "view"]
-yes = ["Y", "y", "Yes", "yes", "YES"]
-no = ["N", "n", "No", "no", "NO"]
+yes = ["Y", "y", "Yes", "yes", "YES", "yES", "YEs", "YeS"]
+no = ["N", "n", "No", "no", "NO", "nO"]
 
 ################################################################
 
