@@ -106,9 +106,12 @@ Please refer to our wiki page at https://github.com/Guardians-of-the-Software-Ga
 How to Install and Run:
 - Visit our repository at https://github.com/Guardians-of-the-Software-Galaxy/password-guardian
 - Download the master branch as a ZIP file
+- Make sure you have python installed in your computer. You can check by going into your terminal and typing **python**. If it does not recognize that command then you will need to install it at https://www.python.org/downloads/. 
 - In your terminal, change to the app directory
 - Run **pip install pytimedinput**
-- Run the program using **python password-guardian**
+- Run **pip install cryptography**
+- Run **pip install pyperclip**
+- Run the program using **python password_guardian_driver.py**
 
 
 How to Uninstall:
